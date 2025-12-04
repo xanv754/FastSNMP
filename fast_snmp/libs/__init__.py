@@ -3,9 +3,8 @@ from fast_snmp.libs.server.local import LocalServer
 from fast_snmp.libs.server.device import Device
 from fast_snmp.libs.snmp.CISCO.snmp_system import SNMPSystem
 from fast_snmp.libs.snmp.CISCO.snmp_if import SNMPIF
-from fast_snmp.libs.snmp.HUAWEI.hwXponDeviceControlObjects import (
-    HwXponDeviceControlObjects,
-)
+from fast_snmp.libs.snmp.HUAWEI.hwXponDeviceControlObjects import HwXponDeviceControlObjects
+from fast_snmp.libs.snmp.UBIQUITI.ubnOnuEntry import UbntOnuEntry
 
 __all__ = [
     RemoteServer,
@@ -14,4 +13,5 @@ __all__ = [
     SNMPSystem,
     SNMPIF,
     HwXponDeviceControlObjects,
+    UbntOnuEntry
 ]

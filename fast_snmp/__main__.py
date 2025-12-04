@@ -1,5 +1,5 @@
 import click
-from fast_snmp.libs import Device, SNMPSystem, SNMPIF, HwXponDeviceControlObjects
+from fast_snmp.libs import Device, SNMPSystem, SNMPIF, HwXponDeviceControlObjects, UbntOnuEntry
 
 
 @click.group()
@@ -611,7 +611,7 @@ def ifOutDiscards(host: str, community: str, dev: bool = False) -> None:
     print(SNMPIF.get_ifOutDiscards(device))
 
 
-@cli.command(help="Get the ONT status of all ONT of a device")
+@cli.command(help="Get total of ONT with online status of a device")
 @click.option(
     "-h",
     "-ip",
@@ -629,9 +629,32 @@ def ifOutDiscards(host: str, community: str, dev: bool = False) -> None:
     help="SNMP community string. In cases of special characters, place them within quotation marks.",
 )
 @click.option("-d", "--dev", is_flag=True, help="Load of the development environment.")
-def ont_status(host: str, community: str, dev: bool = False) -> None:
+def total_ont_online(host: str, community: str, dev: bool = False) -> None:
     device = Device(host=host, community=community, dev=dev)
     print(HwXponDeviceControlObjects.get_total_ont_status_online(device))
+    
+    
+@cli.command(help="Get total of ONU with online status of a device")
+@click.option(
+    "-h",
+    "-ip",
+    "--host",
+    "--ip",
+    type=str,
+    required=True,
+    help="IP address of the device",
+)
+@click.option(
+    "-c",
+    "--community",
+    type=str,
+    required=True,
+    help="SNMP community string. In cases of special characters, place them within quotation marks.",
+)
+@click.option("-d", "--dev", is_flag=True, help="Load of the development environment.")
+def total_onu_online(host: str, community: str, dev: bool = False) -> None:
+    device = Device(host=host, community=community, dev=dev)
+    print(UbntOnuEntry.get_total_onu_status_online(device))
 
 
 if __name__ == "__main__":
