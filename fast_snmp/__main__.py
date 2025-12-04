@@ -631,7 +631,7 @@ def ifOutDiscards(host: str, community: str, dev: bool = False) -> None:
 @click.option("-d", "--dev", is_flag=True, help="Load of the development environment.")
 def ont_status(host: str, community: str, dev: bool = False) -> None:
     device = Device(host=host, community=community, dev=dev)
-    print(HwXponDeviceControlObjects.get_run_status(device))
+    print(HwXponDeviceControlObjects.get_total_ont_status_online(device))
 
 
 if __name__ == "__main__":
