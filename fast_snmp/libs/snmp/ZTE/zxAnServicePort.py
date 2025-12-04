@@ -23,12 +23,20 @@ class ZxAnServicePort:
                 type_response=oid_type,
                 date_time=device.date,
             )
-            total_clients_online = len(data[data[HeaderResponseInterfacesSNMP.VALUES] == "1"])
+            total_clients_online = len(
+                data[data[HeaderResponseInterfacesSNMP.VALUES] == "1"]
+            )
             response = {
-                HeaderResponseInterfacesSNMP.HOST: [data[HeaderResponseInterfacesSNMP.HOST].iloc[0]],
-                HeaderResponseInterfacesSNMP.DATE: [data[HeaderResponseInterfacesSNMP.DATE].iloc[0]],
-                HeaderResponseInterfacesSNMP.TIME: [data[HeaderResponseInterfacesSNMP.TIME].iloc[0]],
-                HeaderResponseInterfacesSNMP.VALUES: [total_clients_online]
+                HeaderResponseInterfacesSNMP.HOST: [
+                    data[HeaderResponseInterfacesSNMP.HOST].iloc[0]
+                ],
+                HeaderResponseInterfacesSNMP.DATE: [
+                    data[HeaderResponseInterfacesSNMP.DATE].iloc[0]
+                ],
+                HeaderResponseInterfacesSNMP.TIME: [
+                    data[HeaderResponseInterfacesSNMP.TIME].iloc[0]
+                ],
+                HeaderResponseInterfacesSNMP.VALUES: [total_clients_online],
             }
             return pd.DataFrame(response)
         except Exception as error:

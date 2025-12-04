@@ -19,25 +19,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router=DeviceRouter, prefix=f"{VERSION_API}/device", tags=["device"])
 app.include_router(
-    router=DeviceRouter, 
-    prefix=f"{VERSION_API}/device", 
-    tags=["device"]
+    router=HuaweiOLTRouter, prefix=f"{VERSION_API}/olt/huawei", tags=["huawei-olt"]
 )
 app.include_router(
-    router=HuaweiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/huawei", 
-    tags=["huawei-olt"]
+    router=UbiquitiOLTRouter,
+    prefix=f"{VERSION_API}/olt/ubiquiti",
+    tags=["ubiquiti-olt"],
 )
 app.include_router(
-    router=UbiquitiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/ubiquiti", 
-    tags=["ubiquiti-olt"]
-)
-app.include_router(
-    router=ZTEOLTRouter, 
-    prefix=f"{VERSION_API}/olt/zte", 
-    tags=["zte-olt"]
+    router=ZTEOLTRouter, prefix=f"{VERSION_API}/olt/zte", tags=["zte-olt"]
 )
 
 

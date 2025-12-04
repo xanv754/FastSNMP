@@ -16,14 +16,11 @@ def ping(host: str, community: str) -> dict[str, str | bool]:
             )
         server = Device(host=host, community=community)
         response = server.ping()
-        return {
-            "IP": host,
-            "isAlive": response
-        }
+        return {"IP": host, "isAlive": response}
     except HTTPException:
         raise
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )
