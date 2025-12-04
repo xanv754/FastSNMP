@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fast_snmp.api.routes.device import SNMPRouter as DeviceRouter
 from fast_snmp.api.routes.HUAWEI.olt import SNMPRouter as HuaweiOLTRouter
 from fast_snmp.api.routes.UBIQUITI.olt import SNMPRouter as UbiquitiOLTRouter
+from fast_snmp.api.routes.ZTE.olt import SNMPRouter as ZTEOLTRouter
 
 
 VERSION_API = "/api/v1"
@@ -32,6 +33,11 @@ app.include_router(
     router=UbiquitiOLTRouter, 
     prefix=f"{VERSION_API}/olt/ubiquiti", 
     tags=["ubiquiti-olt"]
+)
+app.include_router(
+    router=ZTEOLTRouter, 
+    prefix=f"{VERSION_API}/olt/zte", 
+    tags=["zte-olt"]
 )
 
 
