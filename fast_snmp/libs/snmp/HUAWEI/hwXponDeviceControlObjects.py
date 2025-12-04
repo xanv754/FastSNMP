@@ -9,16 +9,22 @@ class HwXponDeviceControlObjects:
     def get_run_status(device: Device) -> pd.DataFrame:
         try:
             oid_type = "INTEGER"
-            response = device.snmp(HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus, options="-On")
-            if not response: return pd.DataFrame(columns=response_interface_snmp)
+            response = device.snmp(
+                HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus,
+                options="-On",
+            )
+            if not response:
+                return pd.DataFrame(columns=response_interface_snmp)
             response = TransformSNMP.output(
-                host=device.host, 
-                stdout=response, 
-                oid=HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus, 
-                type_response=oid_type, 
-                date_time=device.date
+                host=device.host,
+                stdout=response,
+                oid=HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus,
+                type_response=oid_type,
+                date_time=device.date,
             )
             return response
         except Exception as error:
-            logger.error(f"hwXponDeviceControlObjects error: Failed to obtain ONT status - {error}")
+            logger.error(
+                f"hwXponDeviceControlObjects error: Failed to obtain ONT status - {error}"
+            )
             return pd.DataFrame(columns=response_interface_snmp)

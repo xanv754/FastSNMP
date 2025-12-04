@@ -8,9 +8,11 @@ MESSAGE_ERROR = "No Such Object available on this agent at this OID"
 
 class TransformSNMP:
     @staticmethod
-    def output(host: str, stdout: str, oid: str, type_response: str, date_time: datetime) -> pd.DataFrame:
+    def output(
+        host: str, stdout: str, oid: str, type_response: str, date_time: datetime
+    ) -> pd.DataFrame:
         """Transform raw SNMP outputs into manageable data.
-        
+
         :params host: Host of the device.
         :type host: str
         :params stdout: Raw output of the SNMP query.
@@ -23,15 +25,16 @@ class TransformSNMP:
         :type date_time: datetime
         :returns DataFrame: DataFrame with the transformed data.
         """
-        if MESSAGE_ERROR in stdout: raise ValueError(MESSAGE_ERROR)
+        if MESSAGE_ERROR in stdout:
+            raise ValueError(MESSAGE_ERROR)
         date = date_time.strftime("%Y-%m-%d")
         time = date_time.strftime("%H:%M:%S")
         data = {
             HeaderResponseInterfacesSNMP.HOST: [],
-            HeaderResponseInterfacesSNMP.INDEX: [],    
+            HeaderResponseInterfacesSNMP.INDEX: [],
             HeaderResponseInterfacesSNMP.VALUES: [],
             HeaderResponseInterfacesSNMP.DATE: [],
-            HeaderResponseInterfacesSNMP.TIME: []
+            HeaderResponseInterfacesSNMP.TIME: [],
         }
         for line in stdout.splitlines():
             try:
@@ -40,7 +43,8 @@ class TransformSNMP:
                 continue
             if len(raw_oid.strip().split(f"{oid}.")) > 1:
                 index = raw_oid.strip().split(f"{oid}.")[1]
-            else: index = 0
+            else:
+                index = 0
             value = raw_value.strip()
             data[HeaderResponseInterfacesSNMP.HOST].append(host)
             data[HeaderResponseInterfacesSNMP.INDEX].append(index)
@@ -48,4 +52,3 @@ class TransformSNMP:
             data[HeaderResponseInterfacesSNMP.DATE].append(date)
             data[HeaderResponseInterfacesSNMP.TIME].append(time)
         return pd.DataFrame(data)
-        

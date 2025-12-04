@@ -12,14 +12,23 @@ class SNMPSystem:
         try:
             oid_type = "STRING"
             response = device.snmp(SNMPv2MIB.SYSNAME, options="-On")
-            if not response: return pd.DataFrame(columns=response_snmp)
-            response = TransformSNMP.output(host=device.host, stdout=response, oid=SNMPv2MIB.SYSNAME, type_response=oid_type, date_time=device.date)
-            response = response[[
-                HeaderResponseInterfacesSNMP.HOST, 
-                HeaderResponseInterfacesSNMP.VALUES,
-                HeaderResponseInterfacesSNMP.DATE,
-                HeaderResponseInterfacesSNMP.TIME
-            ]]
+            if not response:
+                return pd.DataFrame(columns=response_snmp)
+            response = TransformSNMP.output(
+                host=device.host,
+                stdout=response,
+                oid=SNMPv2MIB.SYSNAME,
+                type_response=oid_type,
+                date_time=device.date,
+            )
+            response = response[
+                [
+                    HeaderResponseInterfacesSNMP.HOST,
+                    HeaderResponseInterfacesSNMP.VALUES,
+                    HeaderResponseInterfacesSNMP.DATE,
+                    HeaderResponseInterfacesSNMP.TIME,
+                ]
+            ]
             return response
         except Exception as error:
             logger.error(f"SNMP System error: Failed to obtain SysName - {error}")
@@ -30,14 +39,23 @@ class SNMPSystem:
         try:
             oid_type = "STRING"
             response = device.snmp(SNMPv2MIB.SYSLOCATION, options="-On")
-            if not response: return pd.DataFrame(columns=response_snmp)
-            response = TransformSNMP.output(host=device.host, stdout=response, oid=SNMPv2MIB.SYSLOCATION, type_response=oid_type, date_time=device.date)
-            response = response[[
-                HeaderResponseInterfacesSNMP.HOST, 
-                HeaderResponseInterfacesSNMP.VALUES,
-                HeaderResponseInterfacesSNMP.DATE,
-                HeaderResponseInterfacesSNMP.TIME
-            ]]
+            if not response:
+                return pd.DataFrame(columns=response_snmp)
+            response = TransformSNMP.output(
+                host=device.host,
+                stdout=response,
+                oid=SNMPv2MIB.SYSLOCATION,
+                type_response=oid_type,
+                date_time=device.date,
+            )
+            response = response[
+                [
+                    HeaderResponseInterfacesSNMP.HOST,
+                    HeaderResponseInterfacesSNMP.VALUES,
+                    HeaderResponseInterfacesSNMP.DATE,
+                    HeaderResponseInterfacesSNMP.TIME,
+                ]
+            ]
             return response
         except Exception as error:
             logger.error(f"SNMP System error: Failed to obtain sysLocation - {error}")
@@ -48,14 +66,23 @@ class SNMPSystem:
         try:
             oid_type = "STRING"
             response = device.snmp(SNMPv2MIB.SYSDESCR, options="-On")
-            if not response: return pd.DataFrame(columns=response_snmp)
-            response = TransformSNMP.output(host=device.host, stdout=response, oid=SNMPv2MIB.SYSDESCR, type_response=oid_type, date_time=device.date)
-            response = response[[
-                HeaderResponseInterfacesSNMP.HOST, 
-                HeaderResponseInterfacesSNMP.VALUES,
-                HeaderResponseInterfacesSNMP.DATE,
-                HeaderResponseInterfacesSNMP.TIME
-            ]]
+            if not response:
+                return pd.DataFrame(columns=response_snmp)
+            response = TransformSNMP.output(
+                host=device.host,
+                stdout=response,
+                oid=SNMPv2MIB.SYSDESCR,
+                type_response=oid_type,
+                date_time=device.date,
+            )
+            response = response[
+                [
+                    HeaderResponseInterfacesSNMP.HOST,
+                    HeaderResponseInterfacesSNMP.VALUES,
+                    HeaderResponseInterfacesSNMP.DATE,
+                    HeaderResponseInterfacesSNMP.TIME,
+                ]
+            ]
             return response
         except Exception as error:
             logger.error(f"SNMP System error: Failed to obtain sysDescr - {error}")
@@ -66,14 +93,23 @@ class SNMPSystem:
         try:
             oid_type = "STRING"
             response = device.snmp(SNMPv2MIB.SYSCONTACT, options="-On")
-            if not response: return pd.DataFrame(columns=response_snmp)
-            response = TransformSNMP.output(host=device.host, stdout=response, oid=SNMPv2MIB.SYSCONTACT, type_response=oid_type, date_time=device.date)
-            response = response[[
-                HeaderResponseInterfacesSNMP.HOST, 
-                HeaderResponseInterfacesSNMP.VALUES,
-                HeaderResponseInterfacesSNMP.DATE,
-                HeaderResponseInterfacesSNMP.TIME
-            ]]
+            if not response:
+                return pd.DataFrame(columns=response_snmp)
+            response = TransformSNMP.output(
+                host=device.host,
+                stdout=response,
+                oid=SNMPv2MIB.SYSCONTACT,
+                type_response=oid_type,
+                date_time=device.date,
+            )
+            response = response[
+                [
+                    HeaderResponseInterfacesSNMP.HOST,
+                    HeaderResponseInterfacesSNMP.VALUES,
+                    HeaderResponseInterfacesSNMP.DATE,
+                    HeaderResponseInterfacesSNMP.TIME,
+                ]
+            ]
             return response
         except Exception as error:
             logger.error(f"SNMP System error: Failed to obtain sysContact - {error}")
@@ -83,17 +119,25 @@ class SNMPSystem:
     def get_sysUpTime(device: Device) -> timedelta | None:
         try:
             response = device.snmp(SNMPv2MIB.SYSUPTIME, options="-On")
-            if not response: return pd.DataFrame(columns=response_snmp)
+            if not response:
+                return pd.DataFrame(columns=response_snmp)
             value_match = re.search(r"\((\d+)\)", response)
-            if not value_match: raise ValueError(f"Unexpected SNMP sysUptime format {response}")
+            if not value_match:
+                raise ValueError(f"Unexpected SNMP sysUptime format {response}")
             timeticks = int(value_match.group(1))
             uptime = timedelta(seconds=(timeticks / 100))
-            return pd.DataFrame({
-                HeaderResponseInterfacesSNMP.HOST: [device.host],
-                HeaderResponseInterfacesSNMP.VALUES: [uptime],
-                HeaderResponseInterfacesSNMP.DATE: [device.date.strftime("%Y-%m-%d")],
-                HeaderResponseInterfacesSNMP.TIME: [device.date.strftime("%H:%M:%S")]
-            })
+            return pd.DataFrame(
+                {
+                    HeaderResponseInterfacesSNMP.HOST: [device.host],
+                    HeaderResponseInterfacesSNMP.VALUES: [uptime],
+                    HeaderResponseInterfacesSNMP.DATE: [
+                        device.date.strftime("%Y-%m-%d")
+                    ],
+                    HeaderResponseInterfacesSNMP.TIME: [
+                        device.date.strftime("%H:%M:%S")
+                    ],
+                }
+            )
         except Exception as error:
             logger.error(f"SNMP System error: Failed to obtain sysUpTime - {error}")
             return None

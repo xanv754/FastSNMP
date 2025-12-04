@@ -35,9 +35,8 @@ class HWXPONDEVICECONTROLOBJECTS:
 
 
 class UBNONUENTRY:
-    ubntOnuOnline: str = "1.3.6.1.4.1.41112.1.5.6.2.1.3"    
-    
-    
+    ubntOnuOnline: str = "1.3.6.1.4.1.41112.1.5.6.2.1.3"
+
+
 class ZXANSERVICEPORT:
     zxAnServicePortAdminStatus: str = "1.3.6.1.4.1.3902.1015.8.1.1.1.22"
-    
