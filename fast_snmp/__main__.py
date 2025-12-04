@@ -1,5 +1,5 @@
 import click
-from fast_snmp.libs import Device, SNMPSystem, SNMPIF, HwXponDeviceControlObjects, UbntOnuEntry
+from fast_snmp.libs import Device, SNMPSystem, SNMPIF, HwXponDeviceControlObjects, UbntOnuEntry, ZxAnServicePort
 
 
 @click.group()
@@ -655,6 +655,29 @@ def total_ont_online(host: str, community: str, dev: bool = False) -> None:
 def total_onu_online(host: str, community: str, dev: bool = False) -> None:
     device = Device(host=host, community=community, dev=dev)
     print(UbntOnuEntry.get_total_onu_status_online(device))
+    
+    
+@cli.command(help="Get total of interface with admin status UP of a ZTE device")
+@click.option(
+    "-h",
+    "-ip",
+    "--host",
+    "--ip",
+    type=str,
+    required=True,
+    help="IP address of the device",
+)
+@click.option(
+    "-c",
+    "--community",
+    type=str,
+    required=True,
+    help="SNMP community string. In cases of special characters, place them within quotation marks.",
+)
+@click.option("-d", "--dev", is_flag=True, help="Load of the development environment.")
+def zte_total_admin_status_online(host: str, community: str, dev: bool = False) -> None:
+    device = Device(host=host, community=community, dev=dev)
+    print(ZxAnServicePort.get_total_admin_status_up(device))
 
 
 if __name__ == "__main__":
