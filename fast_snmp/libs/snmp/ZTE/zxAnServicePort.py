@@ -1,17 +1,17 @@
 import pandas as pd
 from fast_snmp.constants.headers import HeaderResponseInterfacesSNMP
 from fast_snmp.libs.server.device import Device
-from fast_snmp.constants import response_interface_snmp, HWXPONDEVICECONTROLOBJECTS
+from fast_snmp.constants import response_interface_snmp, ZXANSERVICEPORT
 from fast_snmp.utils import logger, TransformSNMP
 
 
-class HwXponDeviceControlObjects:
+class ZxAnServicePort:
     @staticmethod
-    def get_total_ont_status_online(device: Device) -> pd.DataFrame:
+    def get_total_admin_status_up(device: Device) -> pd.DataFrame:
         try:
             oid_type = "INTEGER"
             response_snmp = device.snmp(
-                HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus,
+                ZXANSERVICEPORT.zxAnServicePortAdminStatus,
                 options="-On",
             )
             if not response_snmp:
@@ -19,7 +19,7 @@ class HwXponDeviceControlObjects:
             data = TransformSNMP.output(
                 host=device.host,
                 stdout=response_snmp,
-                oid=HWXPONDEVICECONTROLOBJECTS.hwGponDeviceOntControlRunStatus,
+                oid=ZXANSERVICEPORT.zxAnServicePortAdminStatus,
                 type_response=oid_type,
                 date_time=device.date,
             )
@@ -33,6 +33,6 @@ class HwXponDeviceControlObjects:
             return pd.DataFrame(response)
         except Exception as error:
             logger.error(
-                f"hwXponDeviceControlObjects error: Failed to obtain ONT status online - {error}"
+                f"ubntOnuEntry error: Failed to obtain ONU status online - {error}"
             )
             return pd.DataFrame(columns=response_interface_snmp)
