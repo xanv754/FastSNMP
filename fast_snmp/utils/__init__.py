@@ -1,5 +1,9 @@
 from fast_snmp.utils.log import logger
-from fast_snmp.utils.configuration.server import Configuration, ConfigurationSchema, SSHCredentialSchema
+from fast_snmp.utils.configuration.server import (
+    Configuration,
+    ConfigurationSchema,
+    SSHCredentialSchema,
+)
 from fast_snmp.utils.ssh import SSHConnection
 from fast_snmp.utils.ops import TransformSNMP
 
@@ -10,5 +14,5 @@ __all__ = [
     ConfigurationSchema,
     SSHCredentialSchema,
     SSHConnection,
-    TransformSNMP
+    TransformSNMP,
 ]

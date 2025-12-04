@@ -13,7 +13,7 @@ class SSHConnection:
     _config: ConfigurationSchema | None = None
     _initialized: bool
     _client: list[paramiko.SSHClient]
-    _last_used: float 
+    _last_used: float
     _lock: threading.Lock
     isConnected: bool
 
@@ -29,7 +29,7 @@ class SSHConnection:
             self._last_used = 0
             self._lock = threading.Lock()
             self._initialized = True
-            
+
     def _ssh_jump(self, credentials: list[SSHCredentialSchema]) -> None:
         try:
             sock: paramiko.Channel | None = None
@@ -56,20 +56,25 @@ class SSHConnection:
                 sock = transport.open_channel("direct-tcpip", dest_addr, local_addr)
         except Exception as error:
             logger.error(f"SSH Connection: Failed SSH jump to connect - {error}")
-            
+
     def _auto_close(self, timeout=120) -> None:
-        if hasattr(self, '_monitor_thread') and self._monitor_thread.is_alive():
+        if hasattr(self, "_monitor_thread") and self._monitor_thread.is_alive():
             return
+
         def monitor() -> None:
             while True:
                 time.sleep(5)
                 with self._lock:
-                    if not self.isConnected: break
+                    if not self.isConnected:
+                        break
                     idle_time = time.time() - self._last_used
                     if idle_time > timeout:
-                        logger.info(f"SSH auto-close triggered after {int(idle_time)}s of inactivity.")
+                        logger.info(
+                            f"SSH auto-close triggered after {int(idle_time)}s of inactivity."
+                        )
                         self.disconnect()
                         break
+
         self._monitor_thread = threading.Thread(target=monitor, daemon=True)
         self._monitor_thread.start()
 
@@ -88,8 +93,10 @@ class SSHConnection:
                 if self.isConnected:
                     self._last_used = time.time()
                     return
-                if not self._config: raise ValueError("SSH Configuration not set")
-                if self._config.localConnection: raise ValueError("The configuration does not allow SSH connections")
+                if not self._config:
+                    raise ValueError("SSH Configuration not set")
+                if self._config.localConnection:
+                    raise ValueError("The configuration does not allow SSH connections")
                 self._ssh_jump(self._config.credentials)
                 self.isConnected = True
                 self._last_used = time.time()
@@ -100,7 +107,7 @@ class SSHConnection:
         except Exception as error:
             self.isConnected = False
             logger.error(f"SSH Connection: Failed to connect to server - {error}")
-            
+
     def disconnect(self) -> None:
         try:
             if self.isConnected:

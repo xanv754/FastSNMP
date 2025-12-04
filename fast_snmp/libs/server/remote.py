@@ -45,8 +45,10 @@ class RemoteServer(ExecuteCommand):
                     )
                     if stdout.channel.recv_exit_status() == 0:
                         response = stdout.read().decode().strip()
-                        if "1 received, 0% packet loss" in response: return True
-                        else: return False
+                        if "1 received, 0% packet loss" in response:
+                            return True
+                        else:
+                            return False
                     else:
                         raise Exception(stderr.read().decode().strip())
                 else:
@@ -55,8 +57,10 @@ class RemoteServer(ExecuteCommand):
                     )
                     if stdout.channel.recv_exit_status() == 0:
                         response = stdout.read().decode().strip()
-                        if "is alive" in response: return True
-                        else: return False
+                        if "is alive" in response:
+                            return True
+                        else:
+                            return False
                     else:
                         raise Exception(stderr.read().decode().strip())
             else:

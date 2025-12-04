@@ -12,7 +12,9 @@ class Device:
     host: str
     community: str
 
-    def __init__(self, host: str, community: str, dev: bool = False, testing: bool = False) -> None:
+    def __init__(
+        self, host: str, community: str, dev: bool = False, testing: bool = False
+    ) -> None:
         self.date = datetime.now()
         self.host = host
         self.community = community
@@ -32,15 +34,19 @@ class Device:
 
     def snmp(self, oid: str, options: str | None = None) -> str | None:
         """Execute the SNMP query on the device.
-        
+
         :params oid: The OID to query.
         :returns str | None: The response from the device.
         """
-        if not self.ping: return None
+        if not self.ping:
+            return None
         command_snmp = self._config.get_config().commandSNMP
         if not options:
-            response = self._server.execute(f"{command_snmp} -v 2c -c {self.community} {self.host} {oid}")
+            response = self._server.execute(
+                f"{command_snmp} -v 2c -c {self.community} {self.host} {oid}"
+            )
         else:
-            response = self._server.execute(f"{command_snmp} -v 2c -c {self.community} {options} {self.host} {oid}")
+            response = self._server.execute(
+                f"{command_snmp} -v 2c -c {self.community} {options} {self.host} {oid}"
+            )
         return response
-

@@ -5,19 +5,19 @@ class HeaderResponseInterfacesSNMP:
     VALUES: str = "Respuesta"
     DATE: str = "Fecha"
     TIME: str = "Tiempo"
-    
+
 
 response_interface_snmp = [
     HeaderResponseInterfacesSNMP.HOST,
-    HeaderResponseInterfacesSNMP.INDEX, 
+    HeaderResponseInterfacesSNMP.INDEX,
     HeaderResponseInterfacesSNMP.VALUES,
     HeaderResponseInterfacesSNMP.DATE,
-    HeaderResponseInterfacesSNMP.TIME
+    HeaderResponseInterfacesSNMP.TIME,
 ]
 
 response_snmp = [
     HeaderResponseInterfacesSNMP.HOST,
     HeaderResponseInterfacesSNMP.VALUES,
     HeaderResponseInterfacesSNMP.DATE,
-    HeaderResponseInterfacesSNMP.TIME
+    HeaderResponseInterfacesSNMP.TIME,
 ]
