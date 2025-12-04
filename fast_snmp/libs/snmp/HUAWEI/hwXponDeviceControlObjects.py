@@ -33,6 +33,6 @@ class HwXponDeviceControlObjects:
             return pd.DataFrame(response)
         except Exception as error:
             logger.error(
-                f"hwXponDeviceControlObjects error: Failed to obtain ONT status - {error}"
+                f"hwXponDeviceControlObjects error: Failed to obtain ONT status online - {error}"
             )
             return pd.DataFrame(columns=response_interface_snmp)
