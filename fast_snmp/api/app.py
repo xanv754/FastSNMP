@@ -5,6 +5,7 @@ from fast_snmp.api.routes.device import SNMPRouter as DeviceRouter
 from fast_snmp.api.routes.HUAWEI.olt import SNMPRouter as HuaweiOLTRouter
 from fast_snmp.api.routes.UBIQUITI.olt import SNMPRouter as UbiquitiOLTRouter
 from fast_snmp.api.routes.ZTE.olt import SNMPRouter as ZTEOLTRouter
+from fast_snmp.api.routes.CISCO.snmp_system import SNMPRouter as SystemRouter
 
 
 VERSION_API = "/api/v1"
@@ -38,6 +39,11 @@ app.include_router(
     router=ZTEOLTRouter, 
     prefix=f"{VERSION_API}/olt/zte", 
     tags=["zte-olt"]
+)
+app.include_router(
+    router=SystemRouter, 
+    prefix=f"{VERSION_API}/cisco/system", 
+    tags=["cisco-system"]
 )
 
 
