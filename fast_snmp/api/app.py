@@ -24,16 +24,18 @@ app.add_middleware(
 app.include_router(router=DeviceRouter, prefix=f"{VERSION_API}/device", tags=["device"])
 app.include_router(
     router=HuaweiOLTRouter,
-    prefix=f"{VERSION_API}/olt/huawei-mib",
+    prefix=f"{VERSION_API}/huawei/olt/huawei-mib",
     tags=["huawei-olt-mib"],
 )
 app.include_router(
     router=UbiquitiOLTRouter,
-    prefix=f"{VERSION_API}/olt/ubiquiti-mib",
+    prefix=f"{VERSION_API}/ubiquiti/olt/ubiquiti-mib",
     tags=["ubiquiti-olt-mib"],
 )
 app.include_router(
-    router=ZTEOLTRouter, prefix=f"{VERSION_API}/olt/zte-mib", tags=["zte-olt-mib"]
+    router=ZTEOLTRouter, 
+    prefix=f"{VERSION_API}/zte/olt/zte-mib", 
+    tags=["zte-olt-mib"]
 )
 app.include_router(
     router=SystemRouter,
