@@ -24,9 +24,10 @@ def get_sysname(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )
-        
+
+
 @SNMPRouter.get("/sysLocation")
 def get_sysname(host: str, community: str):
     try:
@@ -44,9 +45,10 @@ def get_sysname(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )
-        
+
+
 @SNMPRouter.get("/sysDescr")
 def get_sysname(host: str, community: str):
     try:
@@ -64,9 +66,10 @@ def get_sysname(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )
-        
+
+
 @SNMPRouter.get("/sysContact")
 def get_sysname(host: str, community: str):
     try:
@@ -84,9 +87,10 @@ def get_sysname(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )
-        
+
+
 @SNMPRouter.get("/sysUpTime")
 def get_sysname(host: str, community: str):
     try:
@@ -104,5 +108,5 @@ def get_sysname(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )

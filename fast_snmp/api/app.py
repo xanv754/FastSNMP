@@ -21,35 +21,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router=DeviceRouter, prefix=f"{VERSION_API}/device", tags=["device"])
 app.include_router(
-    router=DeviceRouter, 
-    prefix=f"{VERSION_API}/device", 
-    tags=["device"]
+    router=HuaweiOLTRouter,
+    prefix=f"{VERSION_API}/olt/huawei-mib",
+    tags=["huawei-olt-mib"],
 )
 app.include_router(
-    router=HuaweiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/huawei-mib", 
-    tags=["huawei-olt-mib"]
+    router=UbiquitiOLTRouter,
+    prefix=f"{VERSION_API}/olt/ubiquiti-mib",
+    tags=["ubiquiti-olt-mib"],
 )
 app.include_router(
-    router=UbiquitiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/ubiquiti-mib", 
-    tags=["ubiquiti-olt-mib"]
+    router=ZTEOLTRouter, prefix=f"{VERSION_API}/olt/zte-mib", tags=["zte-olt-mib"]
 )
 app.include_router(
-    router=ZTEOLTRouter, 
-    prefix=f"{VERSION_API}/olt/zte-mib", 
-    tags=["zte-olt-mib"]
+    router=SystemRouter,
+    prefix=f"{VERSION_API}/cisco/system-mib",
+    tags=["cisco-system-mib"],
 )
 app.include_router(
-    router=SystemRouter, 
-    prefix=f"{VERSION_API}/cisco/system-mib", 
-    tags=["cisco-system-mib"]
-)
-app.include_router(
-    router=IFRouter, 
-    prefix=f"{VERSION_API}/cisco/if-mib", 
-    tags=["cisco-if-mib"]
+    router=IFRouter, prefix=f"{VERSION_API}/cisco/if-mib", tags=["cisco-if-mib"]
 )
 
 
