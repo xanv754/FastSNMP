@@ -33,9 +33,7 @@ app.include_router(
     tags=["ubiquiti-olt-mib"],
 )
 app.include_router(
-    router=ZTEOLTRouter, 
-    prefix=f"{VERSION_API}/zte/olt/zte-mib", 
-    tags=["zte-olt-mib"]
+    router=ZTEOLTRouter, prefix=f"{VERSION_API}/zte/olt/zte-mib", tags=["zte-olt-mib"]
 )
 app.include_router(
     router=SystemRouter,
