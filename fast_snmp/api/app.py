@@ -5,6 +5,8 @@ from fast_snmp.api.routes.device import SNMPRouter as DeviceRouter
 from fast_snmp.api.routes.HUAWEI.olt import SNMPRouter as HuaweiOLTRouter
 from fast_snmp.api.routes.UBIQUITI.olt import SNMPRouter as UbiquitiOLTRouter
 from fast_snmp.api.routes.ZTE.olt import SNMPRouter as ZTEOLTRouter
+from fast_snmp.api.routes.CISCO.snmp_system import SNMPRouter as SystemRouter
+from fast_snmp.api.routes.CISCO.snmp_if import SNMPRouter as IFRouter
 
 
 VERSION_API = "/api/v1"
@@ -19,17 +21,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(router=DeviceRouter, prefix=f"{VERSION_API}/device", tags=["device"])
 app.include_router(
-    router=HuaweiOLTRouter, prefix=f"{VERSION_API}/olt/huawei", tags=["huawei-olt"]
+    router=DeviceRouter, 
+    prefix=f"{VERSION_API}/device", 
+    tags=["device"]
 )
 app.include_router(
-    router=UbiquitiOLTRouter,
-    prefix=f"{VERSION_API}/olt/ubiquiti",
-    tags=["ubiquiti-olt"],
+    router=HuaweiOLTRouter, 
+    prefix=f"{VERSION_API}/olt/huawei-mib", 
+    tags=["huawei-olt-mib"]
 )
 app.include_router(
-    router=ZTEOLTRouter, prefix=f"{VERSION_API}/olt/zte", tags=["zte-olt"]
+    router=UbiquitiOLTRouter, 
+    prefix=f"{VERSION_API}/olt/ubiquiti-mib", 
+    tags=["ubiquiti-olt-mib"]
+)
+app.include_router(
+    router=ZTEOLTRouter, 
+    prefix=f"{VERSION_API}/olt/zte-mib", 
+    tags=["zte-olt-mib"]
+)
+app.include_router(
+    router=SystemRouter, 
+    prefix=f"{VERSION_API}/cisco/system-mib", 
+    tags=["cisco-system-mib"]
+)
+app.include_router(
+    router=IFRouter, 
+    prefix=f"{VERSION_API}/cisco/if-mib", 
+    tags=["cisco-if-mib"]
 )
 
 
