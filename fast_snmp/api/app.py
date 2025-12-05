@@ -6,6 +6,7 @@ from fast_snmp.api.routes.HUAWEI.olt import SNMPRouter as HuaweiOLTRouter
 from fast_snmp.api.routes.UBIQUITI.olt import SNMPRouter as UbiquitiOLTRouter
 from fast_snmp.api.routes.ZTE.olt import SNMPRouter as ZTEOLTRouter
 from fast_snmp.api.routes.CISCO.snmp_system import SNMPRouter as SystemRouter
+from fast_snmp.api.routes.CISCO.snmp_if import SNMPRouter as IFRouter
 
 
 VERSION_API = "/api/v1"
@@ -44,6 +45,11 @@ app.include_router(
     router=SystemRouter, 
     prefix=f"{VERSION_API}/cisco/system", 
     tags=["cisco-system"]
+)
+app.include_router(
+    router=IFRouter, 
+    prefix=f"{VERSION_API}/cisco/if-mib", 
+    tags=["cisco-if-mib"]
 )
 
 
