@@ -24,5 +24,5 @@ def clients(host: str, community: str):
     except:
         raise HTTPException(
             status_code=StatusAPI.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Ups... Something went wrong. Please try again later"
+            detail="Ups... Something went wrong. Please try again later",
         )

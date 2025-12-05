@@ -15,5 +15,5 @@ __all__ = [
     SSHCredentialSchema,
     SSHConnection,
     TransformSNMP,
-    Validation
+    Validation,
 ]
