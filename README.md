@@ -5,14 +5,6 @@
 
 ---
 
-**Tabla de Contenido**
-- [Instalación](#Instalación)
-  - [Requerimientos](#Requerimientos)
-    - [Archivo de Configuración](#Archivo-de-Configuración)
-  - [Entorno Virtual](#Entorno-Virtual)
-
----
-
 # Instalación
 ## Requerimientos
 Desarrollado en Python, se necesita tener instalado Python 3.13 o superior, además de una versión de Docker 28.3 o superior.
