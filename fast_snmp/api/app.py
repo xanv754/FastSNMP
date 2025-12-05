@@ -28,22 +28,22 @@ app.include_router(
 )
 app.include_router(
     router=HuaweiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/huawei", 
+    prefix=f"{VERSION_API}/olt/huawei-mib", 
     tags=["huawei-olt"]
 )
 app.include_router(
     router=UbiquitiOLTRouter, 
-    prefix=f"{VERSION_API}/olt/ubiquiti", 
+    prefix=f"{VERSION_API}/olt/ubiquiti-mib", 
     tags=["ubiquiti-olt"]
 )
 app.include_router(
     router=ZTEOLTRouter, 
-    prefix=f"{VERSION_API}/olt/zte", 
+    prefix=f"{VERSION_API}/olt/zte-mib", 
     tags=["zte-olt"]
 )
 app.include_router(
     router=SystemRouter, 
-    prefix=f"{VERSION_API}/cisco/system", 
+    prefix=f"{VERSION_API}/cisco/system-mib", 
     tags=["cisco-system"]
 )
 app.include_router(

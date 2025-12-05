@@ -7,7 +7,7 @@ from fast_snmp.utils import Validation
 SNMPRouter = APIRouter()
 
 
-@SNMPRouter.get("/sysname")
+@SNMPRouter.get("/sysName")
 def get_sysname(host: str, community: str):
     try:
         if not Validation.ip(host):
@@ -27,7 +27,7 @@ def get_sysname(host: str, community: str):
             detail="Ups... Something went wrong. Please try again later"
         )
         
-@SNMPRouter.get("/syslocation")
+@SNMPRouter.get("/sysLocation")
 def get_sysname(host: str, community: str):
     try:
         if not Validation.ip(host):
@@ -47,7 +47,7 @@ def get_sysname(host: str, community: str):
             detail="Ups... Something went wrong. Please try again later"
         )
         
-@SNMPRouter.get("/sysdescr")
+@SNMPRouter.get("/sysDescr")
 def get_sysname(host: str, community: str):
     try:
         if not Validation.ip(host):
@@ -67,7 +67,7 @@ def get_sysname(host: str, community: str):
             detail="Ups... Something went wrong. Please try again later"
         )
         
-@SNMPRouter.get("/syscontact")
+@SNMPRouter.get("/sysContact")
 def get_sysname(host: str, community: str):
     try:
         if not Validation.ip(host):
@@ -87,7 +87,7 @@ def get_sysname(host: str, community: str):
             detail="Ups... Something went wrong. Please try again later"
         )
         
-@SNMPRouter.get("/sysuptime")
+@SNMPRouter.get("/sysUpTime")
 def get_sysname(host: str, community: str):
     try:
         if not Validation.ip(host):
