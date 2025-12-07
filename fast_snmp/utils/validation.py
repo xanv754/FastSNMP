@@ -9,6 +9,7 @@ class Validation:
         :returns bool: True if the IP is valid, otherwise False.
         """
         try:
+            if ":" in input: input = input.split(":")[0]
             ipaddress.IPv4Address(input)
             return True
         except ValueError:
