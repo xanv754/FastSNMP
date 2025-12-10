@@ -6,24 +6,32 @@ from fast_snmp.utils import Configuration
 
 
 class Device:
+    _instance: 'Device | None' = None
     _config: Configuration
     _server: ExecuteCommand
     date: datetime
     host: str
     community: str
 
+    def __new__(cls, *args) -> 'Device':
+        if not cls._instance:
+            cls._instance = super(Device, cls).__new__(cls)
+        return cls._instance
+
     def __init__(
         self, host: str, community: str, dev: bool = False, testing: bool = False
     ) -> None:
-        self.date = datetime.now()
-        self.host = host
-        self.community = community
-        self._config = Configuration(dev=dev, testing=testing)
-        config = self._config.get_config()
-        if config.localConnection:
-            self._server = LocalServer(config)
-        else:
-            self._server = RemoteServer(config)
+        if not hasattr(self, "_initiliazed"):
+            self.date = datetime.now()
+            self.host = host
+            self.community = community
+            self._config = Configuration(dev=dev, testing=testing)
+            config = self._config.get_config()
+            if config.localConnection:
+                self._server = LocalServer(config)
+            else:
+                self._server = RemoteServer(config)
+            self._initiliazed = True
 
     def ping(self) -> bool:
         """Ping a host.
