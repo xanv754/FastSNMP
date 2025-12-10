@@ -1,5 +1,6 @@
 import json
 from fastapi import APIRouter, HTTPException, status as StatusAPI
+from fast_snmp.api.models.body import BodySNMP
 from fast_snmp.libs import Device, HwXponDeviceControlObjects
 from fast_snmp.utils import Validation
 
@@ -7,18 +8,22 @@ from fast_snmp.utils import Validation
 SNMPRouter = APIRouter()
 
 
-@SNMPRouter.get("/clients")
-def clients(host: str, community: str):
+@SNMPRouter.post("/clients")
+def clients(devices: list[BodySNMP]):
     try:
-        if not Validation.ip(host):
-            raise HTTPException(
-                status_code=StatusAPI.HTTP_400_BAD_REQUEST,
-                detail="Invalid IP format",
-            )
-        server = Device(host=host, community=community)
-        response = HwXponDeviceControlObjects.get_total_ont_status_online(device=server)
-        data = response.to_json(orient="records")
-        return json.loads(data)
+        response: list = []
+        for device in devices:
+            if not Validation.ip(device.ip):
+                raise HTTPException(
+                    status_code=StatusAPI.HTTP_400_BAD_REQUEST,
+                    detail="Invalid IP format",
+                )
+            server = Device(host=device.ip, community=device.community)
+            response = HwXponDeviceControlObjects.get_total_ont_status_online(device=server)
+            data = response.to_json(orient="records")
+            data = json.loads(data)
+            response.append(data)
+        return response
     except HTTPException:
         raise
     except:
