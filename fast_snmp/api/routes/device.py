@@ -16,7 +16,7 @@ def ping(host: str, community: str) -> dict[str, str | bool]:
             )
         server = Device(host=host, community=community)
         response = server.ping()
-        return {"IP": host, "isAlive": response}
+        return {"ip": host, "isAlive": response}
     except HTTPException:
         raise
     except:

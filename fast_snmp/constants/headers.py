@@ -1,10 +1,10 @@
 class HeaderResponseInterfacesSNMP:
-    HOST: str = "IP"
-    COMMUNITY: str = "Comunidad"
-    INDEX: str = "Índices"
-    VALUES: str = "Respuesta"
-    DATE: str = "Fecha"
-    TIME: str = "Tiempo"
+    HOST: str = "ip"
+    COMMUNITY: str = "community"
+    INDEX: str = "index"
+    VALUES: str = "response"
+    DATE: str = "date"
+    TIME: str = "time"
 
 
 response_interface_snmp = [
