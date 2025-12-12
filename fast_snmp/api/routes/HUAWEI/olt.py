@@ -12,14 +12,14 @@ SNMPRouter = APIRouter()
 def clients(devices: list[BodySNMP]):
     try:
         response: list = []
-        server = Device()
-        server.set_configuration()
         for device in devices:
             if not Validation.ip(device.ip):
                 raise HTTPException(
                     status_code=StatusAPI.HTTP_400_BAD_REQUEST,
                     detail="Invalid IP format",
                 )
+            server = Device()
+            server.set_configuration()
             server.set_credentials(host=device.ip, community=device.community)
             response_snmp = HwXponDeviceControlObjects.get_total_ont_status_online(device=server)
             data = response_snmp.to_json(orient="records")
