@@ -1,5 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException, status as StatusAPI
+from fast_snmp.api.models.body import BodySNMPModel
+from fast_snmp.api.models.response import ResponseSNMPModel
 from fast_snmp.libs import Device, UbntOnuEntry
 from fast_snmp.utils import Validation
 
@@ -8,19 +10,23 @@ SNMPRouter = APIRouter()
 
 
 @SNMPRouter.get("/clients")
-def clients(host: str, community: str):
+def clients(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
     try:
-        if not Validation.ip(host):
-            raise HTTPException(
-                status_code=StatusAPI.HTTP_400_BAD_REQUEST,
-                detail="Invalid IP format",
-            )
-        server = Device()
-        server.set_configuration()
-        server.set_credentials(host=host, community=community)
-        response = UbntOnuEntry.get_total_onu_status_online(device=server)
-        data = response.to_json(orient="records")
-        return json.loads(data)
+        response: list = []
+        for device in devices:
+            if not Validation.ip(device.ip):
+                raise HTTPException(
+                    status_code=StatusAPI.HTTP_400_BAD_REQUEST,
+                    detail="Invalid IP format",
+                )
+            server = Device()
+            server.set_configuration()
+            server.set_credentials(host=device.ip, community=device.community)
+            response_snmp = UbntOnuEntry.get_total_onu_status_online(device=server)
+            data = response_snmp.to_json(orient="records")
+            data = json.loads(data)[0]
+            response.append(data)
+        return response
     except HTTPException:
         raise
     except:
