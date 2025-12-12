@@ -57,7 +57,7 @@ class SSHConnection:
         except Exception as error:
             logger.error(f"SSH Connection: Failed SSH jump to connect - {error}")
 
-    def _auto_close(self, timeout=120) -> None:
+    def _auto_close(self, timeout=180) -> None:
         if hasattr(self, "_monitor_thread") and self._monitor_thread.is_alive():
             return
 
