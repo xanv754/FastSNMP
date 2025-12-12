@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
 
-class BodySNMP(BaseModel):
+class BodySNMPModel(BaseModel):
     ip: str
     community: str
