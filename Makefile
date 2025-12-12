@@ -37,6 +37,8 @@ drop:
 	docker stop fast-snmp
 	docker rm fast-snmp
 	docker image rm fast-snmp
+
+restart: drop setup
 	
 
 
