@@ -1,7 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException, status as StatusAPI
-from fast_snmp.api.models.body import BodySNMPModel
-from fast_snmp.api.models.response import ResponseSNMPModel
+from fast_snmp.api.schemas.body import BodySNMPSchema
+from fast_snmp.api.schemas.response import ResponseSNMPSchema
 from fast_snmp.libs import Device, HwXponDeviceControlObjects
 from fast_snmp.utils import Validation
 
@@ -10,7 +10,7 @@ SNMPRouter = APIRouter()
 
 
 @SNMPRouter.post("/clients")
-def clients(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+def clients(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:

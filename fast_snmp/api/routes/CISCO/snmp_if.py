@@ -1,7 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException, status as StatusAPI
-from fast_snmp.api.models.body import BodySNMPModel
-from fast_snmp.api.models.response import ResponseSNMPModel
+from fast_snmp.api.schemas.body import BodySNMPSchema
+from fast_snmp.api.schemas.response import ResponseSNMPSchema
 from fast_snmp.libs import Device, SNMPIF
 from fast_snmp.utils import Validation
 
@@ -9,8 +9,8 @@ from fast_snmp.utils import Validation
 SNMPRouter = APIRouter()
 
 
-@SNMPRouter.get("/ifIndex")
-def get_ifIndex(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifIndex")
+def get_ifIndex(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -36,8 +36,8 @@ def get_ifIndex(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifNumber")
-def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifNumber")
+def get_ifNumber(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -63,8 +63,8 @@ def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifName")
-def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifName")
+def get_ifNumber(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -90,8 +90,8 @@ def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifAlias")
-def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifAlias")
+def get_ifNumber(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -117,8 +117,8 @@ def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifDescr")
-def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifDescr")
+def get_ifNumber(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -144,8 +144,8 @@ def get_ifNumber(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifHighSpeed")
-def get_ifHighSpeed(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHighSpeed")
+def get_ifHighSpeed(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -171,8 +171,8 @@ def get_ifHighSpeed(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifAdminStatus")
-def get_ifAdminStatus(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifAdminStatus")
+def get_ifAdminStatus(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -198,8 +198,8 @@ def get_ifAdminStatus(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifOperStatus")
-def get_ifOperStatus(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifOperStatus")
+def get_ifOperStatus(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -225,8 +225,8 @@ def get_ifOperStatus(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifCounterDiscontinuityTime")
-def get_ifCounterDiscontinuityTime(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifCounterDiscontinuityTime")
+def get_ifCounterDiscontinuityTime(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -252,8 +252,8 @@ def get_ifCounterDiscontinuityTime(devices: list[BodySNMPModel]) -> list[Respons
         )
 
 
-@SNMPRouter.get("/ifHCInOctets")
-def get_ifHCInOctets(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCInOctets")
+def get_ifHCInOctets(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -279,8 +279,8 @@ def get_ifHCInOctets(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifHCInUcastPkts")
-def get_ifHCInUcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCInUcastPkts")
+def get_ifHCInUcastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -306,8 +306,8 @@ def get_ifHCInUcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]
         )
 
 
-@SNMPRouter.get("/ifHCInMulticastPkts")
-def get_ifHCInMulticastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCInMulticastPkts")
+def get_ifHCInMulticastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -333,8 +333,8 @@ def get_ifHCInMulticastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPMo
         )
 
 
-@SNMPRouter.get("/ifHCInBroadcastPkts")
-def get_ifHCInBroadcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCInBroadcastPkts")
+def get_ifHCInBroadcastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -360,8 +360,8 @@ def get_ifHCInBroadcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPMo
         )
 
 
-@SNMPRouter.get("/ifInErrors")
-def get_ifInErrors(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifInErrors")
+def get_ifInErrors(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -387,8 +387,8 @@ def get_ifInErrors(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifInDiscards")
-def get_ifInDiscards(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifInDiscards")
+def get_ifInDiscards(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -414,8 +414,8 @@ def get_ifInDiscards(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifHCOutOctets")
-def get_ifHCOutOctets(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCOutOctets")
+def get_ifHCOutOctets(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -441,8 +441,8 @@ def get_ifHCOutOctets(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifHCOutUcastPkts")
-def get_ifHCOutUcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCOutUcastPkts")
+def get_ifHCOutUcastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -468,8 +468,8 @@ def get_ifHCOutUcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel
         )
 
 
-@SNMPRouter.get("/ifHCOutMulticastPkts")
-def get_ifHCOutMulticastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCOutMulticastPkts")
+def get_ifHCOutMulticastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -495,8 +495,8 @@ def get_ifHCOutMulticastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPM
         )
 
 
-@SNMPRouter.get("/ifHCOutBroadcastPkts")
-def get_ifHCOutBroadcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifHCOutBroadcastPkts")
+def get_ifHCOutBroadcastPkts(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -522,8 +522,8 @@ def get_ifHCOutBroadcastPkts(devices: list[BodySNMPModel]) -> list[ResponseSNMPM
         )
 
 
-@SNMPRouter.get("/ifOutErrors")
-def get_ifOutErrors(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifOutErrors")
+def get_ifOutErrors(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -549,8 +549,8 @@ def get_ifOutErrors(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/ifOutDiscards")
-def get_ifOutDiscards(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/ifOutDiscards")
+def get_ifOutDiscards(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:

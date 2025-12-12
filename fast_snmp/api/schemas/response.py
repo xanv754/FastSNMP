@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 
-class ResponseSNMPModel(BaseModel):
+class ResponseSNMPSchema(BaseModel):
     ip: str
     date: str
     time: str
     response: str | float | int
 
 
-class ResponsePingModel(BaseModel):
+class ResponsePingSchema(BaseModel):
     ip: str
     isAlive: bool

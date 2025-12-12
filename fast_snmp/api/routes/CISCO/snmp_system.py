@@ -1,7 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException, status as StatusAPI
-from fast_snmp.api.models.body import BodySNMPModel
-from fast_snmp.api.models.response import ResponseSNMPModel
+from fast_snmp.api.schemas.body import BodySNMPSchema
+from fast_snmp.api.schemas.response import ResponseSNMPSchema
 from fast_snmp.libs import Device, SNMPSystem
 from fast_snmp.utils import Validation
 
@@ -9,8 +9,8 @@ from fast_snmp.utils import Validation
 SNMPRouter = APIRouter()
 
 
-@SNMPRouter.get("/sysName")
-def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/sysName")
+def get_sysname(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -36,8 +36,8 @@ def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/sysLocation")
-def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/sysLocation")
+def get_sysname(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -63,8 +63,8 @@ def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/sysDescr")
-def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/sysDescr")
+def get_sysname(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -90,8 +90,8 @@ def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/sysContact")
-def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/sysContact")
+def get_sysname(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:
@@ -117,8 +117,8 @@ def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
         )
 
 
-@SNMPRouter.get("/sysUpTime")
-def get_sysname(devices: list[BodySNMPModel]) -> list[ResponseSNMPModel]:
+@SNMPRouter.post("/sysUpTime")
+def get_sysname(devices: list[BodySNMPSchema]) -> list[ResponseSNMPSchema]:
     try:
         response: list = []
         for device in devices:

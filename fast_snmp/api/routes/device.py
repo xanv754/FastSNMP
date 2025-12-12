@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status as StatusAPI
-from fast_snmp.api.models.body import BodySNMPModel
-from fast_snmp.api.models.response import ResponsePingModel
+from fast_snmp.api.schemas.body import BodyPingSchema
+from fast_snmp.api.schemas.response import ResponsePingSchema
 from fast_snmp.libs import Device
 from fast_snmp.utils import Validation
 
@@ -8,8 +8,8 @@ from fast_snmp.utils import Validation
 SNMPRouter = APIRouter()
 
 
-@SNMPRouter.get("/ping")
-def ping(devices: list[BodySNMPModel]) -> list[ResponsePingModel]:
+@SNMPRouter.post("/ping")
+def ping(devices: list[BodyPingSchema]) -> list[ResponsePingSchema]:
     try:
         response: list = []
         for device in devices:
@@ -20,7 +20,7 @@ def ping(devices: list[BodySNMPModel]) -> list[ResponsePingModel]:
                 )
             server = Device()
             server.set_configuration()
-            server.set_credentials(host=device.ip, community=device.community)
+            server.set_credentials(host=device.ip)
             response_ping = server.ping()
             data = {"ip": device.ip, "isAlive": response_ping}
             response.append(data)

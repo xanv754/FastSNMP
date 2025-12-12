@@ -12,7 +12,7 @@ class Device:
     _connected: bool
     date: datetime
     host: str
-    community: str
+    community: str | None
 
     def __new__(cls, *args) -> 'Device':
         if not cls._instance:
@@ -39,7 +39,7 @@ class Device:
         else:
             self._connected = True
 
-    def set_credentials(self, host: str, community: str) -> None:
+    def set_credentials(self, host: str, community: str | None = None) -> None:
         self.date = datetime.now()
         self.host = host
         self.community = community
