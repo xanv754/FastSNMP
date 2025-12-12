@@ -14,7 +14,9 @@ def ping(host: str, community: str) -> dict[str, str | bool]:
                 status_code=StatusAPI.HTTP_400_BAD_REQUEST,
                 detail="Invalid IP format",
             )
-        server = Device(host=host, community=community)
+        server = Device()
+        server.set_configuration()
+        server.set_credentials(host=host, community=community)
         response = server.ping()
         return {"ip": host, "isAlive": response}
     except HTTPException:

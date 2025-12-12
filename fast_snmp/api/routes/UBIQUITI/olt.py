@@ -15,7 +15,9 @@ def clients(host: str, community: str):
                 status_code=StatusAPI.HTTP_400_BAD_REQUEST,
                 detail="Invalid IP format",
             )
-        server = Device(host=host, community=community)
+        server = Device()
+        server.set_configuration()
+        server.set_credentials(host=host, community=community)
         response = UbntOnuEntry.get_total_onu_status_online(device=server)
         data = response.to_json(orient="records")
         return json.loads(data)
